@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Will You Marry Me? 💍</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ffd6e7, #ffeef5);
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .card {
+      width: 90%;
+      max-width: 420px;
+      padding: 35px 20px;
+      background: white;
+      border-radius: 25px;
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
+      position: relative;
+      z-index: 2;
+    }
+
+    .ring {
+      font-size: 70px;
+      animation: bounce 1.5s infinite;
+    }
+
+    h1 {
+      color: #e91e63;
+      font-size: 32px;
+      margin: 15px 0;
+    }
+
+    p {
+      color: #555;
+      font-size: 18px;
+    }
+
+    .buttons {
+      position: relative;
+      height: 100px;
+      margin-top: 20px;
+    }
+
+    button {
+      border: none;
+      border-radius: 30px;
+      padding: 14px 28px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    #yes {
+      background: #e91e63;
+      color: white;
+      margin-right: 10px;
+    }
+
+    #no {
+      background: #ddd;
+      color: #333;
+      position: absolute;
+    }
+
+    #message {
+      display: none;
+    }
+
+    #message h2 {
+      color: #e91e63;
+      font-size: 30px;
+    }
+
+    .heart {
+      position: fixed;
+      bottom: -30px;
+      font-size: 25px;
+      animation: floatUp 4s linear forwards;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-12px);
+      }
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-110vh) scale(1.5);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+
+    <div id="question">
+      <div class="ring">💍</div>
+
+      <h1>Will You Marry Me? ❤️</h1>
+
+      <p>
+        I have one very important question for you... 🥺
+      </p>
+
+      <div class="buttons">
+        <button id="yes" onclick="sayYes()">YES ❤️</button>
+
+        <button id="no"
+                onmouseover="moveNo()"
+                onclick="moveNo()">
+          NO 😜
+        </button>
+      </div>
+    </div>
+
+    <div id="message">
+      <div class="ring">💍❤️</div>
+
+      <h2>I Knew It! 🥰</h2>
+
+      <p>
+        You just made me the happiest person ever! ❤️
+      </p>
+
+      <p>
+        Forever starts now. 💕
+      </p>
+
+      <div style="font-size: 45px;">
+        💖 💍 🥰 💐 💖
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+
+    function moveNo() {
+      const noButton = document.getElementById("no");
+
+      const maxX = window.innerWidth - 130;
+      const maxY = window.innerHeight - 100;
+
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+
+      noButton.style.position = "fixed";
+      noButton.style.left = x + "px";
+      noButton.style.top = y + "px";
+    }
+
+    function sayYes() {
+
+      document.getElementById("question").style.display = "none";
+      document.getElementById("message").style.display = "block";
+
+      createHearts();
+
+      setInterval(createHeart, 300);
+    }
+
+    function createHeart() {
+
+      const heart = document.createElement("div");
+
+      heart.className = "heart";
+
+      const hearts = ["❤️", "💕", "💖", "💗", "💓", "💘"];
+
+      heart.innerHTML =
+        hearts[Math.floor(Math.random() * hearts.length)];
+
+      heart.style.left =
+        Math.random() * 100 + "vw";
+
+      heart.style.fontSize =
+        (20 + Math.random() * 25) + "px";
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 4000);
+    }
+
+    function createHearts() {
+
+      for (let i = 0; i < 30; i++) {
+
+        setTimeout(createHeart, i * 100);
+
+      }
+    }
+
+  </script>
+
+</body>
+</html>
